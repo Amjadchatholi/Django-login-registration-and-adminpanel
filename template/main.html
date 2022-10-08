@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bitwr</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+</head>
+<body class="bg-dark">
+    
+    <div class="container-fluid bg-secondary">
+        <div class="row">
+            <div class="row">
+                <div class="col-6 d-flex align-items-center">
+                    <a class="text-decoration-none" href="{% url 'home' %}">
+                        <h1 style="color:white; font-size:80px; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">index</h1>
+                    </a>
+                    <div>{% if request.user.is_superuser %}
+                        <a class="btn btn-outline-light ms-5" href="{% url 'adminlogin' %}">Goto Admin Panel</a>
+                        <a class="btn btn-outline-light ms-2" href="{% url 'home' %}">Goto Bitwr Home</a>
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="col-6 d-flex align-items-center justify-content-end">
+                    {% if request.user.is_authenticated %}
+                    <p class="h2 mb-0 me-3" >Hello, {{request.user}}</p>
+                    <a class="btn btn-warning" href="{% url 'logout' %}"> Logout</a>
+                    {% else %}
+                        <a class="btn btn-warning ms-2" href="{% url 'adminlogin' %}"> Admin Login</a>
+                    {% endif %}    
+                </div>
+            </div>
+        </div>  
+    </div>
+
+
+
+    {% block content %}
+        
+    {% endblock content %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>
+
+!
